@@ -1,1 +1,2 @@
-pub mod simple_comparisons;
+pub mod inequalities;
+pub mod enums;
