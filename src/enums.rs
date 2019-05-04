@@ -70,6 +70,19 @@ macro_rules! assert_ok {
 }
 
 #[macro_export]
+macro_rules! assert_err {
+    ($result:expr) => {{
+        if let Ok(_) = $result {
+            panic!(
+                "assertion failed: ({0} == Err(_))\n {0}: {1:?}\n",
+                stringify!($result),
+                $result,
+            );
+        }
+    }};
+}
+
+#[macro_export]
 macro_rules! assert_some {
     ($option:expr) => {{
         if let None = $option {
@@ -129,6 +142,25 @@ mod ok {
         assert_ok!(result).with_value(&5);
     }
 }
+
+
+#[cfg(test)]
+mod err {
+    #[test]
+    fn stand_alone() {
+        let result = "z".parse::<u32>();
+        assert_err!(result);
+    }
+
+    #[test]
+    #[should_panic]
+    fn is_some() {
+        let result = "5".parse::<u32>();
+        assert_err!(result);
+    }
+}
+
+
 
 #[cfg(test)]
 mod some {
