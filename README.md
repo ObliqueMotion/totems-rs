@@ -8,7 +8,7 @@ A collection of assertion macros for unit testing in Rust.
 ```rust
 use totems::assert_ok;
 let result = "5".parse::<u32>();
-assert_ok!(result);
+assert_ok!(&result);
 ```
 
 ### `assert_ok!().with_value()`
@@ -16,7 +16,7 @@ assert_ok!(result);
 ```rust
 use totems::assert_ok;
 let result = "5".parse::<u32>();
-assert_ok!(result).with_value(&5);
+assert_ok!(&result).with_value(&5);
 ```
 
 ### `assert_err!()`
@@ -24,7 +24,7 @@ assert_ok!(result).with_value(&5);
 ```rust
 use totems::assert_err;
 let result = "z".parse::<u32>();
-assert_err!(result);
+assert_err!(&result);
 ```
 
 ### `assert_some!()`
@@ -32,7 +32,7 @@ assert_err!(result);
 ```rust
 use totems::assert_some;
 let option = "5".parse::<u32>().ok();
-assert_some!(option);
+assert_some!(&option);
 ```
 
 ### `assert_some!().with_value()`
@@ -40,7 +40,7 @@ assert_some!(option);
 ```rust
 use totems::assert_some;
 let option = "5".parse::<u32>().ok();
-assert_some!(option).with_value(&5);
+assert_some!(&option).with_value(&5);
 ```
 
 ### `assert_none!()`
@@ -48,7 +48,7 @@ assert_some!(option).with_value(&5);
 ```rust
 use totems::assert_none;
 let option = "z".parse::<u32>().ok();
-assert_none!(option);
+assert_none!(&option);
 ```
 
 ## Collections
