@@ -16,7 +16,7 @@ assert_ok!(result);
 ```rust
 use totems::assert_ok;
 let result = "5".parse::<u32>();
-assert_ok!(result).with_value(5);
+assert_ok!(result).with_value(&5);
 ```
 
 ### `assert_err!()`
@@ -40,7 +40,7 @@ assert_some!(option);
 ```rust
 use totems::assert_some;
 let option = "5".parse::<u32>().ok();
-assert_some!(option).with_value(5);
+assert_some!(option).with_value(&5);
 ```
 
 ### `assert_none!()`
