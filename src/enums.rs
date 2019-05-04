@@ -11,15 +11,15 @@ pub struct ChainSome<T>(T);
 // Implementations
 //=============================================================================================
 
-impl<T, E> ChainOk<Result<T, E>>
+impl<'a, T, E> ChainOk<&'a Result<T, E>>
 where
     T: Debug + PartialEq
 {
-    pub fn new(result: Result<T, E>) -> Self {
+    pub fn new(result: &'a Result<T, E>) -> Self {
         Self(result)
     }
 
-    pub fn with_value(&self, right: &T) {
+    pub fn with_value(&self, right: &'a T) {
         if let ChainOk(Ok(left)) = self {
             if left != right {
                 panic!(
@@ -31,15 +31,15 @@ where
     }
 }
 
-impl<T> ChainSome<Option<T>>
+impl<'a, T> ChainSome<&'a Option<T>>
 where
     T: Debug + PartialEq
 {
-    pub fn new(option: Option<T>) -> Self {
+    pub fn new(option: &'a Option<T>) -> Self {
         Self(option)
     }
 
-    pub fn with_value(&self, right: &T) {
+    pub fn with_value(&self, right: &'a T) {
         if let ChainSome(Some(left)) = self {
             if left != right {
                 panic!(
@@ -119,27 +119,27 @@ mod ok {
     #[test]
     fn stand_alone() {
         let result = "5".parse::<u32>();
-        assert_ok!(result);
+        assert_ok!(&result);
     }
 
     #[test]
     fn correct_value() {
         let result = "5".parse::<u32>();
-        assert_ok!(result).with_value(&5);
+        assert_ok!(&result).with_value(&5);
     }
 
     #[test]
     #[should_panic]
     fn incorrect_value() {
         let result = "5".parse::<u32>();
-        assert_ok!(result).with_value(&2);
+        assert_ok!(&result).with_value(&2);
     }
 
     #[test]
     #[should_panic]
     fn is_err() {
         let result = "z".parse::<u32>();
-        assert_ok!(result).with_value(&5);
+        assert_ok!(&result).with_value(&5);
     }
 }
 
@@ -167,27 +167,27 @@ mod some {
     #[test]
     fn stand_alone() {
         let option = "5".parse::<u32>().ok();
-        assert_some!(option);
+        assert_some!(&option);
     }
 
     #[test]
     fn correct_value() {
         let option = "5".parse::<u32>().ok();
-        assert_some!(option).with_value(&5);
+        assert_some!(&option).with_value(&5);
     }
 
     #[test]
     #[should_panic]
     fn incorrect_value() {
         let option = "5".parse::<u32>().ok();
-        assert_some!(option).with_value(&2);
+        assert_some!(&option).with_value(&2);
     }
 
     #[test]
     #[should_panic]
     fn is_none() {
         let option = "z".parse::<u32>().ok();
-        assert_some!(option).with_value(&5);
+        assert_some!(&option).with_value(&5);
     }
 }
 
@@ -196,14 +196,14 @@ mod none {
     #[test]
     fn stand_alone() {
         let option = "z".parse::<u32>().ok();
-        assert_none!(option);
+        assert_none!(&option);
     }
 
     #[test]
     #[should_panic]
     fn is_some() {
         let option = "5".parse::<u32>().ok();
-        assert_none!(option);
+        assert_none!(&option);
     }
 }
 
