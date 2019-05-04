@@ -85,6 +85,20 @@ macro_rules! assert_some {
     }};
 }
 
+#[macro_export]
+macro_rules! assert_none {
+    ($option:expr) => {{
+        if let Some(_) = $option {
+            panic!(
+                "assertion failed: ({0} == None\n {0}: {1:?}\n",
+                stringify!($option),
+                $option,
+            );
+        }
+    }};
+}
+
+
 //=============================================================================================
 // Unit Tests
 //=============================================================================================
@@ -146,3 +160,20 @@ mod some {
         assert_some!(option).with_value(&5);
     }
 }
+
+#[cfg(test)]
+mod none {
+    #[test]
+    fn stand_alone() {
+        let option = "z".parse::<u32>().ok();
+        assert_none!(option);
+    }
+
+    #[test]
+    #[should_panic]
+    fn is_some() {
+        let option = "5".parse::<u32>().ok();
+        assert_none!(option);
+    }
+}
+
