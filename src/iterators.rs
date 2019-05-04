@@ -1,7 +1,11 @@
+pub trait AssertContains {
+    fn assert_contains(&self);
+}
+
 #[macro_export]
 macro_rules! assert_contains {
     ($collection:expr, $item:expr) => {
-        if let None = $collection.iter().find(|&x| x == $item) {
+        if let None = $collection.into_iter().find(|&x| x == $item) {
             panic!("assertion failed: (collection contains item)\n       item: {:?}\n collection: {:?}\n",
                     $item,
                     $collection,
@@ -17,7 +21,7 @@ mod contains {
     fn contains_item_in_vec() {
         let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
         let x = 5;
-        assert_contains!(vec, &x);
+        assert_contains!(&vec, &x);
     }
 
     #[test]
@@ -28,7 +32,7 @@ mod contains {
         map.insert("c", 5);
         map.insert("d", 7);
         let pair = (&"a", &1);
-        assert_contains!(map, pair);
+        assert_contains!(&map, pair);
     }
 
     #[test]
@@ -36,6 +40,6 @@ mod contains {
     fn does_not_contain_item() {
         let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
         let x = 2;
-        assert_contains!(vec, &x);
+        assert_contains!(&vec, &x);
     }
 }
