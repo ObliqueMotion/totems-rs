@@ -3,42 +3,42 @@ A collection of assertion macros for unit testing in Rust.
 
 ## Enums
 
-### assert_ok!()
+### `assert_ok!()`
 
 ```rust
 let result = "5".parse::<u32>();
 assert_ok!(result);
 ```
 
-### assert_ok!().with_value()
+### `assert_ok!().with_value()`
 
 ```rust
 let result = "5".parse::<u32>();
 assert_ok!(result).with_value(5);
 ```
 
-### assert_err!()
+### `assert_err!()`
 
 ```rust
 let result = "z".parse::<u32>();
 assert_err!(result);
 ```
 
-### assert_some!()
+### `assert_some!()`
 
 ```rust
 let option = "5".parse::<u32>().ok();
 assert_some!(option);
 ```
 
-### assert_some!().with_value()
+### `assert_some!().with_value()`
 
 ```rust
 let option = "5".parse::<u32>().ok();
 assert_some!(option).with_value(5);
 ```
 
-### assert_none!()
+### `assert_none!()`
 
 ```rust
 let option = "z".parse::<u32>().ok();
@@ -47,7 +47,7 @@ assert_none!(option);
 
 ## Collections
 
-### assert_contains!()
+### `assert_contains!()`
 
 ```rust
 let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
@@ -63,14 +63,14 @@ let pair = (&"a", &1);
 assert_contains!(&map, pair)
 ```
 
-### assert_all!()
+### `assert_all!()`
 
 ```rust
 let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
 assert_all!(&vec, |&x| x > 0, "all > 0");
 ```
 
-### assert_any!()
+### `assert_any!()`
 
 ```rust
 let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
