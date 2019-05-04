@@ -58,7 +58,6 @@ where
 #[macro_export]
 macro_rules! assert_ok {
     ($result:expr) => {{
-        use super::ChainOk;
         if let Err(_) = $result {
             panic!(
                 "assertion failed: ({0} == Ok(_))\n {0}: {1:?}\n",
@@ -66,14 +65,13 @@ macro_rules! assert_ok {
                 $result,
             );
         }
-        ChainOk::new($result)
+        $crate::enums::ChainOk::new($result)
     }};
 }
 
 #[macro_export]
 macro_rules! assert_some {
     ($option:expr) => {{
-        use super::ChainSome;
         if let None = $option {
             panic!(
                 "assertion failed: ({0} == Some(_))\n {0}: {1:?}\n",
@@ -81,7 +79,7 @@ macro_rules! assert_some {
                 $option,
             );
         }
-        ChainSome::new($option)
+        $crate::enums::ChainSome::new($option)
     }};
 }
 
