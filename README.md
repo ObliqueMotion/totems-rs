@@ -3,7 +3,7 @@ A collection of assertion macros for unit testing in Rust.
 
 ## Enums
 
-### assert_ok!()
+### `assert_ok!()`
 
 ```rust
 let result = "5".parse::<u32>();
