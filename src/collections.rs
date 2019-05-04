@@ -58,26 +58,16 @@ macro_rules! assert_any {
 
 #[cfg(test)]
 mod contains {
-    use std::collections::HashMap;
     #[test]
-    fn contains_item_in_vec() {
+    fn contains_item() {
         let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
         let x = 5;
         assert_contains!(&vec, &x);
     }
 
     #[test]
-    fn contains_item_in_map() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
-        map.insert("b", 3);
-        let pair = (&"a", &1);
-        assert_contains!(&map, pair);
-    }
-
-    #[test]
     #[should_panic]
-    fn does_not_contain_item() {
+    fn excludes_item() {
         let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
         let x = 2;
         assert_contains!(&vec, &x);
@@ -86,7 +76,6 @@ mod contains {
 
 #[cfg(test)]
 mod all {
-    use std::collections::HashMap;
     #[test]
     fn all_items_match() {
         let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
@@ -96,20 +85,14 @@ mod all {
     #[test]
     #[should_panic]
     fn one_item_matches() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
-        map.insert("b", 3);
-        map.insert("c", 5);
-        map.insert("d", 7);
-        let pair = (&"a", &1);
-        assert_all!(&map, |x| x == pair, r#"all == ("a", 1)"#);
+        let vec = vec![-1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        assert_all!(&vec, |&x| x < 0, "all < 0");
     }
 }
 
 
 #[cfg(test)]
 mod any {
-    use std::collections::HashMap;
     #[test]
     fn all_items_match() {
         let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
@@ -118,13 +101,8 @@ mod any {
 
     #[test]
     fn one_item_matches() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
-        map.insert("b", 3);
-        map.insert("c", 5);
-        map.insert("d", 7);
-        let pair = (&"a", &1);
-        assert_any!(&map, |x| x == pair, r#"any == ("a", 1)"#);
+        let vec = vec![-1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        assert_any!(&vec, |&x| x < 0, "all < 0");
     }
 
     #[test]
