@@ -8,7 +8,7 @@ description = "A collection of assertion macros for unit testing or otherwise."
 license = "MIT"
 license-file = "LICENSE"
 repository = "https://github.com/ObliqueMotion/totems-rs"
-keywords = ["assert", "macro", "macros", "unit", "test", "tests", "tools"]
+keywords = ["assert", "macros", "unit", "test", "tests"]
 categories = ["development-tools::testing"]
 
 [dependencies]
