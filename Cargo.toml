@@ -9,6 +9,6 @@ license = "MIT"
 license-file = "LICENSE"
 repository = "https://github.com/ObliqueMotion/totems-rs"
 keywords = ["assertion", "assertions", "macro", "macros", "test", "tests", "testing", "unit tests"]
-categories = "[development-tools::testing]"
+categories = ["development-tools::testing"]
 
 [dependencies]
