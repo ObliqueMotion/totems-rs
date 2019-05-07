@@ -2,6 +2,32 @@
 // Macros
 //=============================================================================================
 
+/// Asserts `(left <  right)`.
+/// 
+/// ### Parameters
+/// 
+/// - `left` The left operand of the comparison.
+/// - `right` The right operand of the comparison.
+/// 
+/// ### Dependencies
+/// - `left` and `right` must be at least [PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
+/// 
+/// ### Example
+///
+/// ```
+/// use totems::assert_lt;
+/// let x = 4;
+/// let y = 5;
+/// assert_lt!(x, y)
+/// ```
+/// 
+/// ### Example Error Messages
+/// 
+/// ```text
+/// thread 'inequalities::lt::incorrect' panicked at 'assertion failed: `(left < right)`
+///   left: `5`,
+///  right: `5`', src/inequalities.rs:245:9
+/// ```
 #[macro_export]
 macro_rules! assert_lt {
     ($left:expr, $right:expr) => ({
@@ -38,6 +64,32 @@ macro_rules! assert_lt {
     });
 }
 
+/// Asserts `(left <= right)`.
+/// 
+/// ### Parameters
+/// 
+/// - `left` The left operand of the comparison.
+/// - `right` The right operand of the comparison.
+/// 
+/// ### Dependencies
+/// - `left` and `right` must be at least [PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
+/// 
+/// ### Example
+///
+/// ```
+/// use totems::assert_le;
+/// let x = 4;
+/// let y = 5;
+/// assert_le!(x, y)
+/// ```
+/// 
+/// ### Example Error Messages
+/// 
+/// ```text
+/// thread 'inequalities::le::incorrect' panicked at 'assertion failed: `(left <= right)`
+///   left: `6`,
+///  right: `5`', src/inequalities.rs:270:9
+/// ```
 #[macro_export]
 macro_rules! assert_le {
     ($left:expr, $right:expr) => ({
@@ -74,6 +126,32 @@ macro_rules! assert_le {
     });
 }
 
+/// Asserts `(left >  right)`.
+/// 
+/// ### Parameters
+/// 
+/// - `left` The left operand of the comparison.
+/// - `right` The right operand of the comparison.
+/// 
+/// ### Dependencies
+/// - `left` and `right` must be at least [PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
+/// 
+/// ### Example
+///
+/// ```
+/// use totems::assert_gt;
+/// let x = 5;
+/// let y = 4;
+/// assert_gt!(x, y)
+/// ```
+/// 
+/// ### Example Error Messages
+/// 
+/// ```text
+/// thread 'inequalities::gt::incorrect' panicked at 'assertion failed: `(left > right)`
+///   left: `5`,
+///  right: `5`', src/inequalities.rs:295:9
+/// ```
 #[macro_export]
 macro_rules! assert_gt {
     ($left:expr, $right:expr) => ({
@@ -110,6 +188,32 @@ macro_rules! assert_gt {
     });
 }
 
+/// Asserts `(left >= right)`.
+/// 
+/// ### Parameters
+/// 
+/// - `left` The left operand of the comparison.
+/// - `right` The right operand of the comparison.
+/// 
+/// ### Dependencies
+/// - `left` and `right` must be at least [PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
+/// 
+/// ### Example
+///
+/// ```
+/// use totems::assert_ge;
+/// let x = 5;
+/// let y = 4;
+/// assert_ge!(x, y)
+/// ```
+/// 
+/// ### Example Error Messages
+/// 
+/// ```text
+/// thread 'inequalities::ge::incorrect' panicked at 'assertion failed: `(left >= right)`
+///   left: `5`,
+///  right: `6`', src/inequalities.rs:320:9
+/// ```
 #[macro_export]
 macro_rules! assert_ge {
     ($left:expr, $right:expr) => ({
