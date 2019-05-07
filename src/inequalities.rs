@@ -10,6 +10,8 @@
 /// - `right` The right operand of the comparison.
 /// 
 /// ### Dependencies
+/// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `left` and `right` must be at least [PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
 /// 
 /// ### Example
@@ -72,6 +74,8 @@ macro_rules! assert_lt {
 /// - `right` The right operand of the comparison.
 /// 
 /// ### Dependencies
+/// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `left` and `right` must be at least [PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
 /// 
 /// ### Example
@@ -134,6 +138,8 @@ macro_rules! assert_le {
 /// - `right` The right operand of the comparison.
 /// 
 /// ### Dependencies
+/// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `left` and `right` must be at least [PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
 /// 
 /// ### Example
@@ -196,6 +202,8 @@ macro_rules! assert_gt {
 /// - `right` The right operand of the comparison.
 /// 
 /// ### Dependencies
+/// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `left` and `right` must be at least [PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
 /// 
 /// ### Example

@@ -10,6 +10,8 @@
 /// - `&item` A reference to an item to compare to items in the collection.
 /// 
 /// ### Dependencies
+/// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `collection` must implement [Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html).
 /// - `&collection` must implement [IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html).
 /// - `item` must implement PartialEq for the types in `collection`.
@@ -52,6 +54,8 @@ macro_rules! assert_contains {
 /// - `description` ***(optional)*** A string describing the predicate.
 /// 
 /// ### Dependencies
+/// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `collection` must implement [Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html).
 /// - `&collection` must implement [IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html).
 /// 
@@ -99,6 +103,8 @@ macro_rules! assert_all {
 /// - `description` ***(optional)*** A string describing the predicate.
 /// 
 /// ### Dependencies
+/// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `collection` must implement [Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html).
 /// - `&collection` must implement [IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html).
 /// 
