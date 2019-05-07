@@ -11,15 +11,39 @@ let result = "5".parse::<u32>();
 assert_ok!(&result);
 ```
 
-### `assert_ok!().with_value()`
+### `assert_ok!() with inequalities`
 
 ```rust
 use totems::assert_ok;
 let result = "5".parse::<u32>();
-assert_ok!(&result).with_value(&5);
+assert_ok!(&result, value == &5);
+assert_ok!(&result, value != &0);
+assert_ok!(&result, value <  &6);
+assert_ok!(&result, value <= &6);
+assert_ok!(&result, value >  &4);
+assert_ok!(&result, value >= &4);
 ```
 
 ### `assert_err!()`
+
+```rust
+use totems::assert_err;
+let result = "z".parse::<u32>();
+assert_err!(&result);
+```
+
+### `assert_err!() with inequalities`
+
+```rust
+use totems::assert_err;
+let result: Result<(), u32> = Err(5);
+assert_err!(&result, value == &5);
+assert_err!(&result, value != &0);
+assert_err!(&result, value <  &6);
+assert_err!(&result, value <= &5);
+assert_err!(&result, value >  &4);
+assert_err!(&result, value >= &5);
+```
 
 ```rust
 use totems::assert_err;
@@ -35,12 +59,17 @@ let option = "5".parse::<u32>().ok();
 assert_some!(&option);
 ```
 
-### `assert_some!().with_value()`
+### `assert_some!() with inequalities`
 
 ```rust
 use totems::assert_some;
 let option = "5".parse::<u32>().ok();
-assert_some!(&option).with_value(&5);
+assert_some!(&option, value == &5);
+assert_some!(&option, value != &0);
+assert_some!(&option, value <  &6);
+assert_some!(&option, value <= &6);
+assert_some!(&option, value >  &4);
+assert_some!(&option, value >= &4);
 ```
 
 ### `assert_none!()`
