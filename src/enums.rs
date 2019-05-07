@@ -11,6 +11,7 @@
 /// 
 /// ### Dependencies
 /// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `value` must be comparable to `Ok`'s inner value.
 /// 
 /// ### Examples
@@ -140,6 +141,7 @@ macro_rules! assert_ok {
 /// 
 /// ### Dependencies
 /// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `value` must be comparable to `Err`'s inner type.
 /// 
 /// ### Examples
@@ -269,6 +271,7 @@ macro_rules! assert_err {
 /// 
 /// ### Dependencies
 /// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// - `value` must be comparable to `Ok`'s inner value.
 /// 
 /// ### Examples
@@ -394,6 +397,10 @@ macro_rules! assert_some {
 /// ### Parameters
 /// 
 /// - `&option` A reference to an `Option`.
+/// 
+/// ### Dependencies
+/// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 /// 
 /// ### Examples
 /// 
