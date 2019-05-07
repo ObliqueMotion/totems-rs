@@ -45,12 +45,6 @@ assert_err!(&result, value >  &4);
 assert_err!(&result, value >= &5);
 ```
 
-```rust
-use totems::assert_err;
-let result = "z".parse::<u32>();
-assert_err!(&result);
-```
-
 ### `assert_some!()`
 
 ```rust
