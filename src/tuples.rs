@@ -891,7 +891,7 @@ macro_rules! assert_9th {
 /// ### Example Error Messages 
 ///
 /// ```text 
-/// thread 'tuples::_010th::le_correct' panicked at 'assertion failed: (tuple.10 <= val)
+/// thread 'tuples::_10th::le_correct' panicked at 'assertion failed: (tuple.10 <= val)
 ///      val: 0
 /// tuple.10: 1
 /// ', src/tuples.rs:2162:9
@@ -977,7 +977,7 @@ macro_rules! assert_10th {
 /// ### Example Error Messages 
 ///
 /// ```text 
-/// thread 'tuples::_011th::le_correct' panicked at 'assertion failed: (tuple.11 <= val)
+/// thread 'tuples::_11th::le_correct' panicked at 'assertion failed: (tuple.11 <= val)
 ///      val: 0
 /// tuple.11: 1
 /// ', src/tuples.rs:2162:9
@@ -1063,7 +1063,7 @@ macro_rules! assert_11th {
 /// ### Example Error Messages 
 ///
 /// ```text 
-/// thread 'tuples::_012th::le_correct' panicked at 'assertion failed: (tuple.12 <= val)
+/// thread 'tuples::_12th::le_correct' panicked at 'assertion failed: (tuple.12 <= val)
 ///      val: 0
 /// tuple.12: 1
 /// ', src/tuples.rs:2162:9
@@ -1149,7 +1149,7 @@ macro_rules! assert_12th {
 /// ### Example Error Messages 
 ///
 /// ```text 
-/// thread 'tuples::_013th::le_correct' panicked at 'assertion failed: (tuple.13 <= val)
+/// thread 'tuples::_13th::le_correct' panicked at 'assertion failed: (tuple.13 <= val)
 ///      val: 0
 /// tuple.13: 1
 /// ', src/tuples.rs:2162:9
@@ -1235,7 +1235,7 @@ macro_rules! assert_13th {
 /// ### Example Error Messages 
 ///
 /// ```text 
-/// thread 'tuples::_014th::le_correct' panicked at 'assertion failed: (tuple.14 <= val)
+/// thread 'tuples::_14th::le_correct' panicked at 'assertion failed: (tuple.14 <= val)
 ///      val: 0
 /// tuple.14: 1
 /// ', src/tuples.rs:2162:9
@@ -1321,7 +1321,7 @@ macro_rules! assert_14th {
 /// ### Example Error Messages 
 ///
 /// ```text 
-/// thread 'tuples::_015th::le_correct' panicked at 'assertion failed: (tuple.15 <= val)
+/// thread 'tuples::_15th::le_correct' panicked at 'assertion failed: (tuple.15 <= val)
 ///      val: 0
 /// tuple.15: 1
 /// ', src/tuples.rs:2162:9
