@@ -2,6 +2,154 @@
 // Macros
 //=============================================================================================
 
+/// Asserts that the nth `item` in a `collection` has a relationship to some value.
+/// 
+/// ### Parameters
+/// 
+/// - `&collection` A reference to a collection.
+/// - `position` The position in the collection (starts at 0).
+/// - `&val` A reference to a value to compare to the nth item.
+/// 
+/// ### Dependencies
+/// 
+/// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
+/// - `&collection` must implement [IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html).
+/// - `val` must implement PartialEq for the types in `collection` to use `==` or `!=`.
+/// - `val` must implement PartialOrd for the types in `collection` to use `<`, `<=`, `>`, `>=`.
+/// 
+/// ### Example
+///
+/// ```
+/// use totems::assert_nth;
+/// let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+/// let x = 5;
+/// assert_nth!(&vec, 2, value == &x); // vec[2] == x
+/// assert_nth!(&vec, 2, value <= &x);
+/// assert_nth!(&vec, 2, value >= &x);
+/// assert_nth!(&vec, 2, value < &(x + 1));
+/// assert_nth!(&vec, 2, value > &(x - 1));
+/// ```
+///
+/// ### Example Error Messages 
+///
+/// ```text 
+/// thread 'collections::nth::le_correct' panicked at 'assertion failed: (collection[3] <= item)
+///          item: 5
+/// collection[3]: 7
+/// ', src/collections.rs:388:9
+/// ```
+#[macro_export]
+macro_rules! assert_nth {
+    ($collection:expr, $position:expr, value == $val:expr) => {
+        match $collection.into_iter().nth($position) {
+            Some(value) => {
+                if value != $val {
+                    panic!("assertion failed: (collection[{0}] == item)\n         item: {1:?}\ncollection[{0}]: {2:?}\n",
+                        $position,
+                        $val,
+                        value,
+                    )
+                }
+            }
+            None => {
+                panic!("assertion failed: (collection[{0}] == item)\n collection[{0}] does not exist\n",
+                    $position,
+                );
+            }
+        }
+    };
+    ($collection:expr, $position:expr, value != $val:expr) => {
+        match $collection.into_iter().nth($position) {
+            Some(value) => {
+                if value == $val {
+                    panic!("assertion failed: (collection[{0}] != item)\n         item: {1:?}\ncollection[{0}]: {2:?}\n",
+                        $position,
+                        $val,
+                        value,
+                    )
+                }
+            }
+            None => {
+                panic!("assertion failed: (collection[{0}] != item)\n collection[{0}] does not exist\n",
+                    $position,
+                );
+            }
+        }
+    };
+    ($collection:expr, $position:expr, value < $val:expr) => {
+        match $collection.into_iter().nth($position) {
+            Some(value) => {
+                if value >= $val {
+                    panic!("assertion failed: (collection[{0}] < item)\n         item: {1:?}\ncollection[{0}]: {2:?}\n",
+                        $position,
+                        $val,
+                        value,
+                    )
+                }
+            }
+            None => {
+                panic!("assertion failed: (collection[{0}] < item)\n collection[{0}] does not exist\n",
+                    $position,
+                );
+            }
+        }
+    };
+    ($collection:expr, $position:expr, value <= $val:expr) => {
+        match $collection.into_iter().nth($position) {
+            Some(value) => {
+                if value > $val {
+                    panic!("assertion failed: (collection[{0}] <= item)\n         item: {1:?}\ncollection[{0}]: {2:?}\n",
+                        $position,
+                        $val,
+                        value,
+                    )
+                }
+            }
+            None => {
+                panic!("assertion failed: (collection[{0}] <= item)\n collection[{0}] does not exist\n",
+                    $position,
+                );
+            }
+        }
+    };
+    ($collection:expr, $position:expr, value > $val:expr) => {
+        match $collection.into_iter().nth($position) {
+            Some(value) => {
+                if value <= $val {
+                    panic!("assertion failed: (collection[{0}] > item)\n         item: {1:?}\ncollection[{0}]: {2:?}\n",
+                        $position,
+                        $val,
+                        value,
+                    )
+                }
+            }
+            None => {
+                panic!("assertion failed: (collection[{0}] > item)\n collection[{0}] does not exist\n",
+                    $position,
+                );
+            }
+        }
+    };
+    ($collection:expr, $position:expr, value >= $val:expr) => {
+        match $collection.into_iter().nth($position) {
+            Some(value) => {
+                if value < $val {
+                    panic!("assertion failed: (collection[{0}] >= item)\n         item: {1:?}\ncollection[{0}]: {2:?}\n",
+                        $position,
+                        $val,
+                        value,
+                    )
+                }
+            }
+            None => {
+                panic!("assertion failed: (collection[{0}] >= item)\n collection[{0}] does not exist\n",
+                    $position,
+                );
+            }
+        }
+    };
+}
+
 /// Asserts that an `item` is contained within a `collection`.
 /// 
 /// ### Parameters
@@ -12,7 +160,6 @@
 /// ### Dependencies
 /// 
 /// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
-/// - `collection` must implement [Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html).
 /// - `&collection` must implement [IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html).
 /// - `item` must implement PartialEq for the types in `collection`.
 /// 
@@ -56,7 +203,6 @@ macro_rules! assert_contains {
 /// ### Dependencies
 /// 
 /// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
-/// - `collection` must implement [Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html).
 /// - `&collection` must implement [IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html).
 /// 
 /// ### Example
@@ -105,7 +251,6 @@ macro_rules! assert_all {
 /// ### Dependencies
 /// 
 /// - All content must implement [Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
-/// - `collection` must implement [Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html).
 /// - `&collection` must implement [IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html).
 /// 
 /// ### Example
@@ -162,6 +307,147 @@ mod contains {
         let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
         let x = 2;
         assert_contains!(&vec, &x);
+    }
+}
+
+#[cfg(test)]
+mod nth {
+    #[test]
+    fn eq_correct() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 5;
+        assert_nth!(&vec, 2, value == &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn eq_incorrect() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 2, value == &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn eq_out_of_range() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 20, value == &x);
+    }
+
+    #[test]
+    fn ne_correct() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 2, value != &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn ne_incorrect() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 5;
+        assert_nth!(&vec, 2, value != &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn ne_out_of_range() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 20, value != &x);
+    }
+
+    #[test]
+    fn lt_correct() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 2, value < &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn lt_incorrect() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 5;
+        assert_nth!(&vec, 2, value < &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn lt_out_of_range() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 20, value < &x);
+    }
+
+    #[test]
+    fn le_correct() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 5;
+        assert_nth!(&vec, 2, value <= &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn le_incorrect() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 4;
+        assert_nth!(&vec, 2, value <= &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn le_out_of_range() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 20, value <= &x);
+    }
+
+    #[test]
+    fn gt_correct() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 4;
+        assert_nth!(&vec, 2, value > &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn gt_incorrect() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 5;
+        assert_nth!(&vec, 2, value > &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn gt_out_of_range() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 20, value > &x);
+    }
+
+    #[test]
+    fn ge_correct() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 5;
+        assert_nth!(&vec, 2, value >= &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn ge_incorrect() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 2, value >= &x);
+    }
+
+    #[test]
+    #[should_panic]
+    fn ge_out_of_range() {
+        let vec = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+        let x = 6;
+        assert_nth!(&vec, 20, value >= &x);
     }
 }
 
